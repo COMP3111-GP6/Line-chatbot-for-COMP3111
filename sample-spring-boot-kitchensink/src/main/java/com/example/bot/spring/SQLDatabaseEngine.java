@@ -22,7 +22,7 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 		
 		try {
 			conn = this.getConnection();
-			String sql = "SELECT keyword, response FROM lab3 where keyword=?";
+			String sql = "SELECT keyword, response FROM lab3 where keyword like concat('%',?,'%')";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1,text);
 			ResultSet rs = stmt.executeQuery();
@@ -32,15 +32,15 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 //			String sql = "SELECT keywork, response FROM lab3";
 //			ResultSet rs = stmt.executeQuery(sql);
 			
-			while(result==null && rs.next()) {
-				String x=null;
+			if(result==null && rs.next()) {
+				//String x=null;
 				String y=null;
-				x=rs.getString("keyword");
+				//x=rs.getString("keyword");
 				y=rs.getString("response");
-				if(text.toLowerCase().equals(x.toLowerCase())) {
+				//if(text.toLowerCase().equals(x.toLowerCase())) {
 					result = y;
-					break;
-				}
+				//	break;
+				//}
 			}
 		
 			rs.close();
